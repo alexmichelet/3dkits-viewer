@@ -1,6 +1,7 @@
 <template>
   <div>
     <TextureLoader @updateTexture="updateTexture"/>
+    <ConfigurationSetter ref="configuration" @updateConfiguration="updateTexture"/>
     <div id="three-scene-canvas"></div>
   </div>
 </template>
@@ -11,11 +12,13 @@ import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls'
 import {OBJLoader} from 'three/examples/jsm/loaders/OBJLoader';
 import {MTLLoader} from 'three/examples/jsm/loaders/MTLLoader';
 import TextureLoader from './TextureLoader.vue'
+import ConfigurationSetter from "@/components/ConfigurationSetter";
 
 export default {
   name: 'Viewer',
   components: {
-    TextureLoader
+    TextureLoader,
+    ConfigurationSetter
   },
   data() {
     return {
@@ -100,21 +103,26 @@ export default {
       this.scene.add(light);
     },
     updateTexture(newTextureUrl = null) {
-      this.currentTextureUrl = newTextureUrl;
+      let modelName = this.$refs.configuration.modelName;
+
+      if (newTextureUrl !== null) {
+        this.currentTextureUrl = newTextureUrl;
+      }
 
       let loader = new MTLLoader(this.loadingManager);
       loader.load(
-          this.publicPath + 'model/material.mtl',
+          this.publicPath + 'model/' + modelName + '.mtl',
           (materials) => {
             materials.preload();
-            this.loadModel(materials);
+            this.loadModel(materials, modelName);
           });
     },
-    loadModel(materials) {
+    loadModel(materials, modelName) {
       this.scene.remove(this.model);
+
       new OBJLoader()
           .setMaterials(materials)
-          .load(this.publicPath + 'model/model.obj',
+          .load(this.publicPath + 'model/' + modelName + '.obj',
               (object) => {
                 this.model = object;
                 this.scene.add(this.model);
@@ -135,6 +143,6 @@ export default {
 <style>
 #three-scene-canvas {
   width: 100%;
-  height: calc(100vh - 50px);
+  height: 100vh;
 }
 </style>

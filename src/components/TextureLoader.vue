@@ -51,8 +51,11 @@ export default {
 
 <style>
 #texture-loader {
-  height: 50px;
-  line-height: 50px;
-  background: #adadad;
+  height: 30px;
+  line-height: 30px;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  text-align: center;
 }
 </style>
