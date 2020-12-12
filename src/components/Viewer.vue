@@ -34,9 +34,12 @@ export default {
     // Custom loading manager to interpolate dynamic textures
     this.loadingManager = new THREE.LoadingManager();
     this.loadingManager.setURLModifier((url) => {
-      if (url === '/model/$TEXTURE$') {
+      const urlData = url.split('/model/');
+      const baseUrl = urlData[0];
+      const fileUrl = urlData[1];
+      if (fileUrl === '$TEXTURE$') {
         if (this.currentTextureUrl === null) {
-          return 'model/textures/default.png';
+          return baseUrl + '/model/textures/default.png';
         } else {
           return this.currentTextureUrl;
         }
