@@ -9,7 +9,7 @@
 import * as THREE from 'three'
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls'
 import {OBJLoader} from 'three/examples/jsm/loaders/OBJLoader';
-import {MTLLoader} from "three/examples/jsm/loaders/MTLLoader";
+import {MTLLoader} from 'three/examples/jsm/loaders/MTLLoader';
 import TextureLoader from './TextureLoader.vue'
 
 export default {
@@ -53,7 +53,7 @@ export default {
     this.updateTexture();
   },
   methods: {
-    animateThreeJs() {
+    updateRender() {
       this.renderer.render(this.scene, this.camera);
       this.renderer.shadowMap.needsUpdate = true;
     },
@@ -69,8 +69,6 @@ export default {
           0.1,
           1000
       );
-      this.camera.position.set(0, 1.6, -3);
-      // this.camera.lookAt(0, 1.1, 0);
 
       // Renderer
       this.renderer = new THREE.WebGLRenderer({
@@ -89,9 +87,7 @@ export default {
 
       // Controls
       this.controls = new OrbitControls(this.camera, this.renderer.domElement);
-      this.controls.addEventListener('change', this.animateThreeJs);
-      this.controls.target.set(0, 1.1, 0);
-      this.controls.update();
+      this.controls.addEventListener('change', this.updateRender);
 
       // Grid
       const gridHelper = new THREE.GridHelper(100, 100);
@@ -128,9 +124,15 @@ export default {
               (object) => {
                 this.model = object;
                 this.scene.add(this.model);
-                this.animateThreeJs();
+                this.initNewKitView();
               }
           );
+    },
+    initNewKitView() {
+      this.camera.position.set(0, 1.6, -3);
+      this.controls.target.set(0, 1.1, 0);
+      this.controls.update();
+      this.updateRender();
     }
   }
 }
