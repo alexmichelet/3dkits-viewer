@@ -34,6 +34,10 @@ export default {
     }
   },
   mounted() {
+    new OBJLoader().load(this.publicPath + 'model/long-tucked.obj', () => {});
+    new OBJLoader().load(this.publicPath + 'model/long-untucked.obj', () => {});
+    new OBJLoader().load(this.publicPath + 'model/short-tucked.obj', () => {});
+
     // Custom loading manager to interpolate dynamic textures
     this.loadingManager = new THREE.LoadingManager(() => {}, this.updateRender);
     this.loadingManager.setURLModifier((url) => {
