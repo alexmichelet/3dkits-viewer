@@ -32,7 +32,7 @@ export default {
   },
   mounted() {
     // Custom loading manager to interpolate dynamic textures
-    this.loadingManager = new THREE.LoadingManager();
+    this.loadingManager = new THREE.LoadingManager(() => {}, this.updateRender);
     this.loadingManager.setURLModifier((url) => {
       const urlData = url.split('/model/');
       const baseUrl = urlData[0];
@@ -55,7 +55,6 @@ export default {
   methods: {
     updateRender() {
       this.renderer.render(this.scene, this.camera);
-      this.renderer.shadowMap.needsUpdate = true;
     },
     initScene() {
       // Scene
@@ -78,11 +77,6 @@ export default {
       this.renderer.outputEncoding = THREE.sRGBEncoding;
       this.renderer.setSize(this.sceneCanvas.offsetWidth, this.sceneCanvas.offsetHeight);
       this.renderer.setClearColor("#adadad");
-      this.renderer.shadowMap.enabled = true;
-      this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-      this.renderer.shadowMapSoft = true;
-      this.renderer.shadowMap.autoUpdate = false;
-      this.renderer.shadowMap.needsUpdate = true;
       this.sceneCanvas.append(this.renderer.domElement);
 
       // Controls
@@ -97,7 +91,7 @@ export default {
       let ambientLight = new THREE.AmbientLight(0xffffff, 0.5)
       this.scene.add(ambientLight);
 
-      let light = new THREE.PointLight(0xfc831d, 0.4, 100)
+      let light = new THREE.PointLight(0xffffff, 0.4, 100)
       light.position.set(0, 5, -2)
       light.castShadow = true
       light.shadow.radius = 1
