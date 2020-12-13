@@ -34,19 +34,16 @@ export default {
     }
   },
   mounted() {
-    new OBJLoader().load(this.publicPath + 'model/long-tucked.obj', () => {});
-    new OBJLoader().load(this.publicPath + 'model/long-untucked.obj', () => {});
-    new OBJLoader().load(this.publicPath + 'model/short-tucked.obj', () => {});
-
     // Custom loading manager to interpolate dynamic textures
     this.loadingManager = new THREE.LoadingManager(() => {}, this.updateRender);
     this.loadingManager.setURLModifier((url) => {
       const urlData = url.split('/model/');
       const baseUrl = urlData[0];
       const fileUrl = urlData[1];
-      if (fileUrl === '$TEXTURE$') {
+      if (fileUrl.indexOf('$TEXTURE$') !== -1) {
         if (this.currentTextureUrl === null) {
-          return baseUrl + '/model/textures/default.png';
+          const fmVersion =  fileUrl.substr(0, 4);
+          return baseUrl + '/model/' + fmVersion + '/textures/default.png';
         } else {
           return this.currentTextureUrl;
         }

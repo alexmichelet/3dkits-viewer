@@ -1,5 +1,10 @@
 <template>
   <div id="configuration">
+    <select @change="updateConfiguration" v-model="fm">
+      <option value="21">FM20/21</option>
+      <option value="19">FM18/19</option>
+    </select>
+
     <select @change="updateConfiguration" v-model="sleeves">
       <option value="short">Short sleeves</option>
       <option value="long">Long sleeves</option>
@@ -10,18 +15,18 @@
 </template>
 
 <script>
-
 export default {
   name: 'ConfigurationSetter',
   data() {
     return {
+      fm: '21',
       tucked: false,
       sleeves: 'short'
     }
   },
   computed: {
     modelName: function () {
-      return this.sleeves + '-' + (this.tucked ? 'tucked' : 'untucked');
+      return 'fm' + this.fm + '/' + this.sleeves + '-' + (this.tucked ? 'tucked' : 'untucked');
     }
   },
   methods: {
