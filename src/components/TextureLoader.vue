@@ -1,6 +1,6 @@
 <template>
   <div id="texture-loader">
-    <input type="file" @change="loadTexture">
+    <input ref="input" type="file" @change="loadTexture">
   </div>
 </template>
 
@@ -25,6 +25,7 @@ export default {
         this.drawTexture(e.target.result);
       };
       reader.readAsDataURL(event.target.files[0]);
+      this.$refs.input.value = '';
     },
     drawTexture(file) {
       let context = this.canvas.getContext('2d');
