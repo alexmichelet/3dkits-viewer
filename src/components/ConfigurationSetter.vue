@@ -46,5 +46,6 @@ export default {
   position: absolute;
   top: 30px;
   right: 0;
+  z-index: 1;
 }
 </style>

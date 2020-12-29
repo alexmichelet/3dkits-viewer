@@ -20,14 +20,17 @@ export default {
   },
   methods: {
     loadTexture(event) {
+      this.doLoadTexture(event.target.files[0]);
+    },
+    doLoadTexture(file) {
       let reader = new FileReader();
       reader.onloadend = (e) => {
         this.drawTexture(e.target.result);
       };
-      reader.readAsDataURL(event.target.files[0]);
+      reader.readAsDataURL(file);
       this.$refs.input.value = '';
     },
-    drawTexture(file) {
+    drawTexture(fileData) {
       let context = this.canvas.getContext('2d');
 
       let image = new Image();
@@ -40,7 +43,7 @@ export default {
 
         this.computeBlobUrl();
       }
-      image.src = file;
+      image.src = fileData;
     },
     computeBlobUrl() {
       let blob = blobUtil.dataURLToBlob(this.canvas.toDataURL());
@@ -58,5 +61,6 @@ export default {
   top: 0;
   width: 100%;
   text-align: center;
+  z-index: 1;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <TextureLoader @updateTexture="updateTexture"/>
+    <TextureLoader ref="textureLoader" @updateTexture="updateTexture"/>
     <ConfigurationSetter ref="configuration" @updateConfiguration="updateTexture"/>
     <div id="three-scene-canvas"></div>
   </div>
