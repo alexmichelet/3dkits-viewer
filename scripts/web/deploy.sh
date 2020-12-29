@@ -1,10 +1,12 @@
 #!/usr/bin/env sh
 
+sudo rm -rf dist
+
 # abort on errors
 set -e
 
 # build
-npm run build
+yarn vue-build
 
 # navigate into the build output directory
 cd dist

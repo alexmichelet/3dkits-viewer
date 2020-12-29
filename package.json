@@ -1,16 +1,22 @@
 {
   "name": "3dkits-viewer",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "main": "main.js",
+  "author": "Alex Michelet",
+  "description": "Football Manager 3D Kits Viewer",
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "github": "./scripts/web/deploy.sh",
+    "electron": "./scripts/desktop/build-dev.sh",
+    "windows": "./scripts/desktop/build-windows.sh",
+    "vue-build": "vue-cli-service build",
+    "vue-build-for-electron": "VUE_CLI_SERVICE_CONFIG_PATH=`realpath vue.config.electron.js` yarn vue-build",
+    "postinstall": "electron-builder install-app-deps",
+    "electron-build-windows": "electron-builder -w"
   },
   "dependencies": {
     "blob-util": "^2.0.2",
     "core-js": "^3.6.5",
-    "node-sass": "^4.13.1",
-    "sass-loader": "^8.0.2",
     "three": "^0.119.1",
     "vue": "^2.6.11"
   },
@@ -19,6 +25,8 @@
     "@vue/cli-plugin-eslint": "~4.4.0",
     "@vue/cli-service": "~4.4.0",
     "babel-eslint": "^10.1.0",
+    "electron": "^11.1.1",
+    "electron-builder": "^22.9.1",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
     "vue-template-compiler": "^2.6.11"
@@ -41,5 +49,15 @@
     "> 1%",
     "last 2 versions",
     "not dead"
-  ]
+  ],
+  "build": {
+    "appId": "io.3dkitsviewer.app",
+    "files": ["**/*", "resources/*"],
+    "directories": {
+      "buildResources": "resources"
+    },
+    "win": {
+      "target": "portable"
+    }
+  }
 }
