@@ -1,22 +1,24 @@
 ## Project setup
 ```
-npm install
+yarn
 ```
 
-### Compiles and hot-reloads for development
+### Web version: dev, with hot-reloads
 ```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
+yarn serve
 ```
 
-### Lints and fixes files
+### Web version: deploy to github.io
 ```
-npm run lint
+yarn github
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Desktop version: dev
+```
+yarn electron
+```
+
+### Desktop version: build Windows version
+```
+yarn windows
+```
