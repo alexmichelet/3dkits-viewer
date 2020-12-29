@@ -108,6 +108,13 @@ export default {
       light.shadow.mapSize.width = 2048
       light.shadow.mapSize.height = 2048
       this.scene.add(light);
+
+      window.addEventListener('resize', () => {
+        this.camera.aspect = this.sceneCanvas.getBoundingClientRect().width / this.sceneCanvas.getBoundingClientRect().height;
+        this.camera.updateProjectionMatrix();
+        this.renderer.setSize(this.sceneCanvas.offsetWidth, this.sceneCanvas.offsetHeight);
+        this.updateRender();
+      });
     },
     updateTexture(newTextureUrl = null) {
       let modelName = this.$refs.configuration.modelName;
