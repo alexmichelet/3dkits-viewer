@@ -2,11 +2,13 @@
   <div id="app" @drop="onDrop" @dragenter="onDragEnter" @dragleave="onDragLeave" @dragover.prevent>
     <div id="drop-bg" v-show="isDropActive"></div>
     <Viewer ref="viewer"/>
+    <VersionInfo/>
   </div>
 </template>
 
 <script>
 import Viewer from './components/Viewer.vue'
+import VersionInfo from './components/VersionInfo.vue'
 
 export default {
   name: 'App',
@@ -16,6 +18,7 @@ export default {
     }
   },
   components: {
+    VersionInfo,
     Viewer
   },
   methods: {
@@ -40,6 +43,7 @@ export default {
 body {
   padding: 0;
   margin: 0;
+  background: #adadad;
 }
 
 #drop-bg {
@@ -51,5 +55,9 @@ body {
   background: rgba(0, 0, 0, 0.7);
   z-index: 2;
   pointer-events: none;
+}
+
+#app {
+  overflow: hidden;
 }
 </style>
