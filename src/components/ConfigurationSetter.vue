@@ -10,9 +10,9 @@
       <option value="long">Long sleeves</option>
     </select>
 
-    <input @change="updateConfiguration" type="checkbox" v-model="tucked">Tucked
+    <input @change="updateConfiguration" id="tucked-option" type="checkbox" v-model="tucked"><label for="tucked-option">Tucked</label>
 
-    <input @change="updateConfigurationWithTextureRefresh" type="checkbox" v-model="numbersOverlay">Show numbers/name position
+    <input @change="updateConfigurationWithTextureRefresh" id="numbers-overlay-option" type="checkbox" v-model="numbersOverlay"><label for="numbers-overlay-option">Show numbers/name position</label>
   </div>
 </template>
 
