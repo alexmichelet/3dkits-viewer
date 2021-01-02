@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     updateConfiguration() {
-      this.$emit('updateConfiguration');
+      this.$bus.emit('updated-configuration');
     }
   }
 }

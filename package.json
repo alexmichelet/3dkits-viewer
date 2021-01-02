@@ -18,7 +18,8 @@
     "blob-util": "^2.0.2",
     "core-js": "^3.6.5",
     "three": "^0.119.1",
-    "vue": "^2.6.11"
+    "vue": "^2.6.11",
+    "vue-bus": "^1.2.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.4.0",
@@ -52,7 +53,10 @@
   ],
   "build": {
     "appId": "io.3dkitsviewer.app",
-    "files": ["**/*", "resources/*"],
+    "files": [
+      "**/*",
+      "resources/*"
+    ],
     "directories": {
       "buildResources": "resources"
     },

@@ -47,7 +47,7 @@ export default {
     },
     computeBlobUrl() {
       let blob = blobUtil.dataURLToBlob(this.canvas.toDataURL());
-      this.$emit('updateTexture', URL.createObjectURL(blob));
+      this.$bus.emit('loaded-texture', { textureUrl: URL.createObjectURL(blob) });
     }
   }
 }

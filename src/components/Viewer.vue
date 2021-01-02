@@ -1,7 +1,7 @@
 <template>
   <div>
-    <TextureLoader ref="textureLoader" @updateTexture="updateTexture"/>
-    <ConfigurationSetter ref="configuration" @updateConfiguration="updateTexture"/>
+    <TextureLoader ref="textureLoader"/>
+    <ConfigurationSetter ref="configuration"/>
     <div id="three-scene-canvas"></div>
   </div>
 </template>
@@ -32,6 +32,12 @@ export default {
       currentTextureUrl: null,
       loadingManager: null,
     }
+  },
+  created() {
+    this.$bus.on('updated-configuration', this.updateTexture);
+    this.$bus.on('loaded-texture', (data) => {
+      this.updateTexture(data.textureUrl)
+    });
   },
   mounted() {
     // Custom loading manager to interpolate dynamic textures
