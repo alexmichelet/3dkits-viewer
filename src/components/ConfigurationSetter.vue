@@ -1,6 +1,6 @@
 <template>
   <div id="configuration">
-    <select @change="updateConfiguration" v-model="fm">
+    <select @change="updateConfigurationWithTextureRefresh" v-model="fm">
       <option value="21">FM20/21</option>
       <option value="19">FM18/19</option>
     </select>
@@ -11,6 +11,8 @@
     </select>
 
     <input @change="updateConfiguration" type="checkbox" v-model="tucked">Tucked
+
+    <input @change="updateConfigurationWithTextureRefresh" type="checkbox" v-model="numbersOverlay">Show numbers/name position
   </div>
 </template>
 
@@ -21,7 +23,8 @@ export default {
     return {
       fm: '21',
       tucked: false,
-      sleeves: 'short'
+      sleeves: 'short',
+      numbersOverlay: false
     }
   },
   computed: {
@@ -31,7 +34,10 @@ export default {
   },
   methods: {
     updateConfiguration() {
-      this.$bus.emit('updated-configuration');
+      this.$bus.emit('updated-configuration', { textureRefresh: false });
+    },
+    updateConfigurationWithTextureRefresh() {
+      this.$bus.emit('updated-configuration', { textureRefresh: true });
     }
   }
 }

@@ -34,10 +34,13 @@ export default {
     }
   },
   created() {
-    this.$bus.on('updated-configuration', this.updateTexture);
-    this.$bus.on('loaded-texture', (data) => {
-      this.updateTexture(data.textureUrl)
+    this.$bus.on('updated-configuration', (data) => {
+      // do not update the texture if it needs to be refreshed, because TextureLoader will do it
+      if (!data.textureRefresh) {
+        this.updateTexture(null);
+      }
     });
+    this.$bus.on('loaded-texture', (data) => this.updateTexture(data.textureUrl));
   },
   mounted() {
     // Custom loading manager to interpolate dynamic textures
