@@ -1,18 +1,21 @@
 <template>
   <div id="configuration">
     <select @change="updateConfigurationWithTextureRefresh" v-model="fm">
-      <option value="21">FM20/21</option>
-      <option value="19">FM18/19</option>
+      <option value="21">FM20/21 Kit</option>
+      <option value="19">FM18/19 Kit</option>
+      <option value="ball">FM21 Ball</option>
     </select>
 
-    <select @change="updateConfiguration" v-model="sleeves">
-      <option value="short">Short sleeves</option>
-      <option value="long">Long sleeves</option>
-    </select>
+    <div v-show="fm == 21 || fm == 19">
+      <select @change="updateConfiguration" v-model="sleeves">
+        <option value="short">Short sleeves</option>
+        <option value="long">Long sleeves</option>
+      </select>
 
-    <input @change="updateConfiguration" id="tucked-option" type="checkbox" v-model="tucked"><label for="tucked-option">Tucked</label>
+      <input @change="updateConfiguration" id="tucked-option" type="checkbox" v-model="tucked"><label for="tucked-option">Tucked</label>
 
-    <input @change="updateConfigurationWithTextureRefresh" id="numbers-overlay-option" type="checkbox" v-model="numbersOverlay"><label for="numbers-overlay-option">Show numbers/name position</label>
+      <input @change="updateConfigurationWithTextureRefresh" id="numbers-overlay-option" type="checkbox" v-model="numbersOverlay"><label for="numbers-overlay-option">Show numbers/name position</label>
+    </div>
   </div>
 </template>
 
@@ -29,6 +32,10 @@ export default {
   },
   computed: {
     modelName: function () {
+      if (this.fm === 'ball') {
+        return 'ball/ball21';
+      }
+
       return 'fm' + this.fm + '/' + this.sleeves + '-' + (this.tucked ? 'tucked' : 'untucked');
     }
   },
@@ -37,7 +44,16 @@ export default {
       this.$bus.emit('updated-configuration', { textureRefresh: false });
     },
     updateConfigurationWithTextureRefresh() {
-      this.$bus.emit('updated-configuration', { textureRefresh: true });
+      if (this.fm === 'ball') {
+        this.$bus.emit('updated-configuration', { textureRefresh: false });
+        return;
+      }
+
+      if (this.$root.$children[0].$refs.viewer.$refs.textureLoader.currentTextureData === null) {
+        this.$bus.emit('updated-configuration', { textureRefresh: false });
+      }
+
+      this.$bus.emit('updated-configuration', {textureRefresh: true});
     }
   }
 }
