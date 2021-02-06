@@ -12,7 +12,7 @@ sudo docker run --rm -ti \
  -v ~/.cache/electron:/root/.cache/electron \
  -v ~/.cache/electron-builder:/root/.cache/electron-builder \
  electronuserland/builder:wine \
- /bin/bash -c "yarn electron-build-windows"
+ /bin/bash -c "yarn && yarn electron-build-windows"
 
 sudo rm dist/builder-effective-config.yaml
 sudo rm -rf dist/win-unpacked
