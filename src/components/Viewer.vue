@@ -215,7 +215,7 @@ export default {
 }
 
 #toggle-icon{
-  background-image: url('/chevron-right-solid.svg');
+  background-image: url(/3dkits-viewer/chevron-right-solid.svg);
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
