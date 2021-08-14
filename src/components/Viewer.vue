@@ -1,7 +1,12 @@
 <template>
   <div>
-    <TextureLoader ref="textureLoader"/>
-    <ConfigurationSetter ref="configuration"/>
+    <button id="config-toggle" onclick="toggleConfig();">
+      <div id="toggle-icon"></div>
+    </button>
+    <div id="scene-config">
+      <TextureLoader ref="textureLoader"/>
+      <ConfigurationSetter ref="configuration"/>
+    </div>
     <div id="three-scene-canvas"></div>
   </div>
 </template>
@@ -167,5 +172,66 @@ export default {
 #three-scene-canvas {
   width: 100%;
   height: 100vh;
+}
+
+#three-scene-canvas canvas:focus-visible{
+  outline: none !important;
+}
+
+#scene-config{
+  width: 350px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  background: #21283cf7;
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  border: none;
+  border-radius: 0 0 0 10px;
+  z-index: 3;
+  color: #f1f1f3;
+  -webkit-transition: right .3s ease-in-out;
+  -moz-transition: right .3s ease-in-out;
+  -ms-transition: right .3s ease-in-out;
+  -o-transition: right .3s ease-in-out;
+  transition: right .3s ease-in-out;
+}
+
+#config-toggle{
+  position: absolute;
+  right: 350px;
+  top: 25px;
+  background-color: #404b63;
+  color: white;
+  padding: 7px 5px 7px 7px;
+  border: none;
+  border-radius: 5px 0 0 5px;
+  cursor: pointer;
+  -webkit-transition: right .3s ease-in-out;
+  -moz-transition: right .3s ease-in-out;
+  -ms-transition: right .3s ease-in-out;
+  -o-transition: right .3s ease-in-out;
+  transition: right .3s ease-in-out;
+}
+
+#toggle-icon{
+  background-image: url('/chevron-right-solid.svg');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 15px;
+  height: 15px;
+}
+
+.config-hidden #config-toggle{
+  right: 0px !important;
+}
+
+.config-hidden #scene-config{
+  right: -350px !important;
+}
+
+.config-hidden #toggle-icon{
+  transform: rotate(180deg);
 }
 </style>

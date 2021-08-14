@@ -1,5 +1,5 @@
 <template>
-  <div id="version-info">v{{ version }}</div>
+  <div id="version-info">FM 3D Kits Viewer <div id="version-number">v{{ version }}</div></div>
 </template>
 
 <script>
@@ -18,11 +18,19 @@ export default {
 
 #version-info {
   position: absolute;
-  top: 2px;
-  left: 2px;
-  color: rgba(255, 255, 255, 0.8);
-  z-index: 1;
+  top: 25px;
+  left: 0;
+  color: white;
+  background: #404b63;
+  padding: 5px 7px 5px 12px;
+  border-radius: 0 5px 5px 0;
+  z-index: 5;
   font-size: 14px;
-  font-family: 'Roboto Condensed', sans-serif;
+}
+
+#version-number{
+  display: inline;
+  opacity: 0.3;
+  font-size: 10px;
 }
 </style>

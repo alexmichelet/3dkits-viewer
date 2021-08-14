@@ -1,6 +1,9 @@
 <template>
   <div id="texture-loader">
-    <input ref="input" type="file" @change="loadTexture">
+    <div class="upload-btn-wrapper">
+      <button class="btn btn-primary">Upload .PNG file</button>
+      <input ref="input" type="file" @change="loadTexture">
+    </div>
   </div>
 </template>
 
@@ -79,12 +82,53 @@ export default {
 
 <style>
 #texture-loader {
-  height: 30px;
-  line-height: 30px;
+  text-align: center;
+  padding: 30px;
+  position: relative;
+  border-bottom: 1px solid #2c3548;
+  z-index: 4;
+  height: 42px;
+}
+
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  height: 42px;
+}
+
+.btn {
+  font-family: 'PT Serif', serif;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 16px;
+  height: 42px;
+  cursor: pointer;
+  -webkit-transition: all 80ms ease-out;
+  -moz-transition: all 80ms ease-out;
+  -o-transition: all 80ms ease-out;
+  transition: all 80ms ease-out;
+}
+
+.btn-primary{
+  border: none;
+  color: white;
+  background-color: #007EC1;
+}
+
+.upload-btn-wrapper:hover .btn-primary{
+  border: none;
+  color: white;
+  background-color: #2ba1e0;
+}
+
+.upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  right: 0;
   position: absolute;
   top: 0;
-  width: 100%;
-  text-align: center;
-  z-index: 1;
+  z-index: 0;
+  cursor: pointer;
 }
 </style>

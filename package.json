@@ -1,8 +1,8 @@
 {
   "name": "3dkits-viewer",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "main": "main.js",
-  "author": "Alex Michelet",
+  "author": "Alex Michelet & wfm18",
   "description": "Football Manager 3D Kits Viewer",
   "scripts": {
     "serve": "vue-cli-service serve",
